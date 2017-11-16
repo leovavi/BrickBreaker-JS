@@ -2,14 +2,18 @@ window.onload = function(){
 	let canvas = document.getElementById("GameCanvas");
 	let ctx = canvas.getContext("2d");
 	let cnvWth = canvas.width;
-
-	/*ctx.beginPath();
-	ctx.rect(20, 40, 60, 25);
-	ctx.fillStyle = "#FF0000";
-	ctx.fill();
-	ctx.closePath();*/
-
+	let cnvHt = canvas.height;
+	let dx = 2, dy = -2, lifes = 3;
+	let key = [];
 	fill(cnvWth, ctx);
+
+
+	run(cnvHt, cnvWth, ctx, dx, dy);	
+}
+
+function run(cnvHt, cnvWth, ctx, dx, dy){
+	setInterval(drawBall(cnvHt, cnvWth, ctx), 10);
+	setInterval(drawPong(cnvHt, cnvWth, ctx, dx, dy), 10);
 }
 
 function fill(cnvWth, ctx){
@@ -31,4 +35,27 @@ function randColor(){
 	let rand = color[Math.floor(Math.random()*4)];
 
 	return rand;
+}
+
+function drawBall(ht, wth, ctx){
+	let x = wth/2, y = ht-30; 
+	ctx.beginPath();
+	ctx.fillStyle = "#0101DF";
+
+	ctx.arc(x, y, 10, 0, Math.PI*2);
+	ctx.fill();
+	ctx.closePath();
+}
+
+function drawPong(ht, wth, ctx, dx, dy){
+	let pongWth = 60, pongHt = 10;
+	let x = (wth-pongWth)/2, y = ht-pongHt-10;
+
+	ctx.beginPath();
+	ctx.fillStyle = "#8A0829";
+	x += dx;
+	y -= dy;
+	ctx.rect(x, y, pongWth, pongHt);
+	ctx.fill();
+	ctx.closePath();
 }

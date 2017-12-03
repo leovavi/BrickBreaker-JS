@@ -1,29 +1,14 @@
-let game;
-
-window.onload = function(){
-	game = new Phaser.Game(800, 600, Phaser.CANVAS, 'Brick Breaker Game');
-	game.state.add("mainState", mainState);
-	game.state.start("mainState");
-}
-
 let mainState = {
 	preload: function(){
-		game.load.image("level1Back", "assets/goku.jpg");
-		game.load.image("bkgBlack", "assets/bkgBlack.png");
-		game.load.image("player", "assets/paddle.png");
-		game.load.image("img_bRed", "assets/bRed.png");
-		game.load.image("img_bGreen", "assets/bGreen.png");
-		game.load.image("img_bPurple", "assets/bPurple.png");
-		game.load.image("img_bYellow", "assets/bYellow.png");
-		game.load.image("ball", "assets/ball3.png");
-		game.load.audio("sonic", "sound/sonic_theme.mp3");
+		lvl1Music.play();
 	},
 
 	create: function(){
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 
 		this.width = game.world.width, this.height = game.world.height, this.playerVelX = 0.5, prevX = game.input.x;
-		this.brickCols = 12, this.brickRows = 5, this.lives = 3, this.points = 0;
+		this.brickCols = 12, this.brickRows = 10, lives = 3, points = 0;
+		currentLevel = 1;
 
 		this.background = game.add.tileSprite(0, 0, this.width, this.height, "level1Back");
 		
@@ -45,6 +30,8 @@ let mainState = {
 		this.ball.iniVelX = 200;
 		this.ball.iniVelY = -300;
 		this.ball.isShot = false;
+		this.ball.checkWorldBounds = true;
+		this.ball.events.onOutOfBounds.add(this.loseLife, this);
 
 		this.bricks = game.add.group();
 		this.brickImgs = ["img_bRed", "img_bGreen", "img_bPurple", "img_bYellow"];
@@ -56,18 +43,18 @@ let mainState = {
 		game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
 		game.physics.arcade.checkCollision.down = false;
 
-		let txtConfig = {
-			font: "18px sans-serif",
-			fill: "#f44141",
-			align: "right"
-		};
+		this.sfx_HitPly = game.add.audio("hitPly");
+		this.sfx_HitBrick = game.add.audio("hitBrick");
+		this.sfx_LoseLife = game.add.audio("loseLife");
+		this.sfx_LoseLevel = game.add.audio("loseLevel");
+		this.sfx_WinLevel = game.add.audio("winLevel");
 
-		this.txtLives = game.add.text(0, 0, gtxtLives+this.lives, txtConfig);
+		this.txtLives = game.add.text(0, 0, gtxtLives+lives, txtLivesConfig);
 		this.txtLives.align = "left";
 		this.txtLives.anchor.set(0, 1);
 		this.txtLives.y = this.height;
 
-		this.txtPoints = game.add.text(0, 0, this.points+gtxtPoints, txtConfig);
+		this.txtPoints = game.add.text(0, 0, points+gtxtPoints, txtPointsConfig);
 		this.txtPoints.anchor.set(1);
 		this.txtPoints.y = this.height;
 		this.txtPoints.x = this.width;
@@ -77,7 +64,7 @@ let mainState = {
 	},
 
 	update: function(){
-		game.physics.arcade.collide(this.ball, this.player);
+		game.physics.arcade.collide(this.ball, this.player, this.hitPlayer, null, this);
 		game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
 
 		this.movePlayer();
@@ -87,6 +74,7 @@ let mainState = {
 		this.player.anchor.setTo(0.5, 1);
 		this.player.x = game.world.centerX;
 		this.player.y = this.height-25;
+		this.ball.isShot = false;
 
 		this.resetBall();
 	},
@@ -155,6 +143,46 @@ let mainState = {
 
 	removeBrick: function(ball, brick){
 		brick.kill();
-		this.points += 10;
+		points += 10;
+		this.txtPoints.text = points+gtxtPoints;
+		this.sfx_HitBrick.play();
+
+		if(this.bricks.countLiving() == 0)
+			this.endGame();
+	},
+
+	hitPlayer: function(ball, player){
+		this.sfx_HitPly.play();
+		// if(ball.body.x > player.body.x){
+		// 	if(ball.body.velocity.x < 0)
+		// 		ball.body.velocity.x *= -1;
+		// }else{
+		// 	if(ball.body.velocity.x > 0)
+		// 		ball.body.velocity.x *= -1;
+		// }
+	},
+
+	loseLife: function(){
+		this.resetPlayer();
+		lives--;
+		points -= 50;
+		if(points < 0)
+			points = 0;
+		this.txtLives.text = gtxtLives+lives;
+		this.txtPoints.text = points+gtxtPoints;
+		this.sfx_LoseLife.play();
+
+		if(lives === 0)
+			this.endGame();
+	},
+
+	endGame: function(){
+		lvl1Music.stop();
+		game.state.start("over");
+
+		if(lives>0)
+			this.sfx_WinLevel.play();
+		else
+			this.sfx_LoseLevel.play();
 	}
 }

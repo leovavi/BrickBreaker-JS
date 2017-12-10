@@ -4,7 +4,8 @@ let currentLevel = 0;
 let gtxtWin = "Congratulations! You've passed level ";
 let gtxtGO = "GAME OVER";
 
-let menuMusic = null, lvl1Music = null, lvl2Music = null, lvl3Music = null;
+let menuMusic, lvl1Music, lvl2Music, lvl3Music;
+let sfx_HitPly, sfx_HitBrick, sfx_breakBrick, sfx_LoseLife, sfx_WinLevel;
 
 let out = 0, over = 1, down = 2;
 let lives = 3, points = 0;

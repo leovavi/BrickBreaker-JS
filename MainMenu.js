@@ -22,6 +22,12 @@ let MainMenu = {
 		this.btnStart.anchor.x = 0.5;
 		this.btnStart.x = game.world.centerX;
 		this.btnStart.y = game.world.centerY;
+
+		lvl2Music = game.add.audio("dk");
+		lvl2Music.loop = true;
+
+		lvl3Music = game.add.audio("sonic");
+		lvl3Music.loop = true;
 	},
 
 	update: function(){

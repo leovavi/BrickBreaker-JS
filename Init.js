@@ -14,6 +14,7 @@ let Init = {
 	preload: function(){
 		game.load.image("void", "assets/progBar_void.png");
 		game.load.image("full", "assets/progBar_full.png");
+		game.load.image("gokuLoad", "assets/gokuLoading.png");
 	},
 
 	create: function(){

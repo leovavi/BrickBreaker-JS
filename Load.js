@@ -11,6 +11,16 @@ let Load = {
 
 		game.load.setPreloadSprite(this.progFull);
 
+		this.txt = game.add.text(0, 0, "Loading Files...", txtOverConfig);
+		this.txt.anchor.set(0.5);
+		this.txt.x = game.world.centerX;
+		this.txt.y = game.world.centerY - 50;
+
+		this.goku = game.add.image(0, 0, "gokuLoad");
+		this.goku.anchor.set(0.5, 0.5);
+		this.goku.x = game.world.centerX - 145;
+		this.goku.y = game.world.centerY + 20;
+
 		//Image Files
 		game.load.image("bkg", "assets/back.png");
 		game.load.image("logo", "assets/logo.png");
@@ -18,10 +28,18 @@ let Load = {
 		game.load.image("level1Back", "assets/goku.jpg");
 		game.load.image("bkgBlack", "assets/bkgBlack.png");
 		game.load.image("player", "assets/paddle.png");
-		game.load.image("img_bRed", "assets/bRed.png");
-		game.load.image("img_bGreen", "assets/bGreen.png");
-		game.load.image("img_bPurple", "assets/bPurple.png");
-		game.load.image("img_bYellow", "assets/bYellow.png");
+		game.load.image("img_bRed", "assets/Bricks/rojo.png");
+		game.load.image("img_bRed2", "assets/Bricks/rojo3.png");
+		game.load.image("img_bRed3", "assets/Bricks/rojo4.png");
+		game.load.image("img_bGreen", "assets/Bricks/verde.png");
+		game.load.image("img_bGreen2", "assets/Bricks/verde3.png");
+		game.load.image("img_bGreen3", "assets/Bricks/verde4.png");
+		game.load.image("img_bPurple", "assets/Bricks/morado.png");
+		game.load.image("img_bPurple2", "assets/Bricks/morado3.png");
+		game.load.image("img_bPurple3", "assets/Bricks/morado4.png");
+		game.load.image("img_bYellow", "assets/Bricks/amarillo.png");
+		game.load.image("img_bYellow2", "assets/Bricks/amarillo3.png");
+		game.load.image("img_bYellow3", "assets/Bricks/amarillo4.png");
 		game.load.image("ball", "assets/ball3.png");
 		game.load.image("bkg", "assets/back.png");
 
@@ -30,25 +48,38 @@ let Load = {
 		game.load.spritesheet("back", "assets/btn_back.png", 190, 49);
 
 		//Audio Files
-		game.load.audio("music", "sound/One.mp3");
-		game.load.audio("dbz", "sound/dbz.mp3"); 
-		game.load.audio("dbz2", "sound/dbz2.mp3")
-		game.load.audio("dbz3", "sound/dbz3.mp3");
+		game.load.audio("music", "sound/One.ogg");
+		game.load.audio("dbz", "sound/dbz.ogg");
+		game.load.audio("dk", "sound/dk theme.ogg");
+		game.load.audio("sonic", "sound/sonic.ogg");
 		game.load.audio("hitPly", "sound/hit.wav");
 		game.load.audio("hitBrick", "sound/brick.wav");
+		game.load.audio("breakBrick", "sound/break.mp3");
 		game.load.audio("loseLife", "sound/loseLife.ogg");
 		game.load.audio("winLevel", "sound/win.ogg");
 		game.load.audio("loseLevel", "sound/loseGame.ogg");
+	},
 
-		//Create Audio Files
+	create: function(){
+		// Create Audio Files
 		menuMusic = game.add.audio("music");
 		menuMusic.loop = true;
 
 		lvl1Music = game.add.audio("dbz");
 		lvl1Music.loop = true;
+
+		sfx_HitPly = game.add.audio("hitPly");
+		sfx_HitBrick = game.add.audio("hitBrick");
+		sfx_breakBrick = game.add.audio("breakBrick");
+		sfx_LoseLife = game.add.audio("loseLife");
+		sfx_LoseLevel = game.add.audio("loseLevel");
+		sfx_WinLevel = game.add.audio("winLevel");
+
+		this.txt.text = "Decoding Audio...";
+		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);
 	},
 
-	create: function(){
-		game.state.start("menu")
+	showMenu: function(){
+		game.state.start("menu");
 	}
 }

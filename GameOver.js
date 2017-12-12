@@ -8,10 +8,17 @@ let GameOver = {
 
 		this.bkg = game.add.tileSprite(0, 0, width, height, "bkg");
 
-		this.btnBack = game.add.button(0, 0, "back", this.mainMenu, this, over, out, down);
-		this.btnBack.anchor.set(0.5, 1);
-		this.btnBack.x = game.world.centerX;
-		this.btnBack.y = game.world.height-200;
+		this.btnStr = "";
+
+		if(lives <= 0 || currentLevel == 3)
+			this.btnStr = "back";
+		else
+			this.btnStr = "nxtLvl";
+
+		this.btn = game.add.button(0, 0, this.btnStr, this.nextState, this, over, out, down);
+		this.btn.anchor.set(0.5, 1);
+		this.btn.x = game.world.centerX;
+		this.btn.y = game.world.height-200;
 
 		this.txtOver = game.add.text(0, 0, gtxtGO, txtOverConfig);
 		this.txtOver.anchor.x = 0.5;
@@ -33,11 +40,16 @@ let GameOver = {
 
 	update: function(){
 		if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-			this.mainMenu();
+			this.nextState();
 		this.bkg.tilePosition.y += 2;
 	},
 
-	mainMenu: function(){
-		game.state.start("menu");
+	nextState: function(){
+		// if(lives == 0)
+			game.state.start("menu");
+		// else if(currentLevel == 1)
+		// 	game.state.start("lvl2");
+		// else if(currentLevel == 2)
+		// 	game.state.start("lvl3");
 	}
 };

@@ -1,6 +1,7 @@
 let MainMenu = {
 	preload: function(){
 		menuMusic.play();
+		game.load.image("goku", "assets/kamehameha.png");
 	},
 
 	create: function(){
@@ -37,7 +38,7 @@ let MainMenu = {
 	},
 
 	startGame: function(){
-		game.state.start("mainState");
+		game.state.start("lvl1");
 		menuMusic.stop();
 	}
 };

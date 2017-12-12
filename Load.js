@@ -28,6 +28,13 @@ let Load = {
 		game.load.image("level1Back", "assets/goku.jpg");
 		game.load.image("bkgBlack", "assets/bkgBlack.png");
 		game.load.image("player", "assets/paddle.png");
+		game.load.image("slowP", "assets/slowP.png");
+		game.load.image("fastP", "assets/fastP.png");
+		game.load.image("slowB", "assets/slowB.png");
+		game.load.image("fastB", "assets/fastB.png");
+		game.load.image("oneUp", "assets/1Up.png");
+		game.load.image("oneDown", "assets/1Down.png");
+		game.load.image("doubleP", "assets/DP.png");
 		game.load.image("img_bRed", "assets/Bricks/rojo.png");
 		game.load.image("img_bRed2", "assets/Bricks/rojo3.png");
 		game.load.image("img_bRed3", "assets/Bricks/rojo4.png");
@@ -46,6 +53,7 @@ let Load = {
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);
 		game.load.spritesheet("back", "assets/btn_back.png", 190, 49);
+		game.load.spritesheet("nxtLvl", "assets/btn_Nxt.png", 190, 49);
 
 		//Audio Files
 		game.load.audio("music", "sound/One.ogg");
@@ -56,8 +64,14 @@ let Load = {
 		game.load.audio("hitBrick", "sound/brick.wav");
 		game.load.audio("breakBrick", "sound/break.mp3");
 		game.load.audio("loseLife", "sound/loseLife.ogg");
+		game.load.audio("lifeUp", "sound/1Up.mp3");
+		game.load.audio("lifeDown", "sound/pipe.mp3");
 		game.load.audio("winLevel", "sound/win.ogg");
 		game.load.audio("loseLevel", "sound/loseGame.ogg");
+		game.load.audio("fast", "sound/fast.mp3");
+		game.load.audio("slow", "sound/slow.mp3");
+		game.load.audio("coin", "sound/mariocoin.mp3");
+		game.load.audio("kame", "sound/kamehameha.mp3");
 	},
 
 	create: function(){
@@ -74,6 +88,14 @@ let Load = {
 		sfx_LoseLife = game.add.audio("loseLife");
 		sfx_LoseLevel = game.add.audio("loseLevel");
 		sfx_WinLevel = game.add.audio("winLevel");
+		sfx_Fast = game.add.audio("fast");
+		sfx_Slow = game.add.audio("slow");
+		sfx_LifeUp = game.add.audio("lifeUp");
+		sfx_LifeDown = game.add.audio("lifeDown");
+		sfx_DP = game.add.audio("coin");
+		sfx_GokuS = game.add.audio("kame");
+
+		timer = game.time.create(false);
 
 		this.txt.text = "Decoding Audio...";
 		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);

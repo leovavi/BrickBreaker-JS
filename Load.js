@@ -53,11 +53,13 @@ let Load = {
 		game.load.image("level3Back", "assets/sonic.jpg");
 		game.load.image("sonicMove", "assets/sonicMove.jpg");
 		game.load.image("dkMove", "assets/dkMove.jpg");
+		game.load.image("pause", "assets/btn_pause.png");
 
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);
 		game.load.spritesheet("back", "assets/btn_back.png", 190, 49);
 		game.load.spritesheet("nxtLvl", "assets/btn_Nxt.png", 190, 49);
+		game.load.spritesheet("cont", "assets/btn_cont.png", 190, 49);
 
 		//Audio Files
 		game.load.audio("music", "sound/One.ogg");

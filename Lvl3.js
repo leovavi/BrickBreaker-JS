@@ -73,7 +73,7 @@ let Lvl3 = {
 		this.txtPoints.y = this.height;
 		this.txtPoints.x = this.width;
 
-		this.timer = game.timer.create(false);
+		this.timer = game.time.create(false);
 		this.fn.addTimerDelay(this.timer);
 
 		this.fn.resetPlayer(this.player, this.ball, this.height);
@@ -139,7 +139,7 @@ let Lvl3 = {
 		if(this.timer.running)
 			this.fn.stopTime(this.timer);
 		if(lives === 0)
-			this.fn.endGame(lvl1Music, this.timer);
+			this.fn.endGame(lvl3Music, this.timer);
 	},
 
 	power: function(player, power){

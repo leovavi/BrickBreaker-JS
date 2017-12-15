@@ -158,6 +158,7 @@ class globalFn{
 				
 				timer.start();
 				sfx_DP.play();
+				sfx_Star.play();
 				break;
 
 			case "oneUp":

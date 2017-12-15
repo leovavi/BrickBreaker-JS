@@ -72,6 +72,7 @@ let Load = {
 		game.load.audio("slow", "sound/slow.mp3");
 		game.load.audio("coin", "sound/mariocoin.mp3");
 		game.load.audio("kame", "sound/kamehameha.mp3");
+		game.load.audio("star", "sound/star.mp3");
 	},
 
 	create: function(){
@@ -94,8 +95,11 @@ let Load = {
 		sfx_LifeDown = game.add.audio("lifeDown");
 		sfx_DP = game.add.audio("coin");
 		sfx_GokuS = game.add.audio("kame");
+		sfx_Star = game.add.audio("star");
+		sfx_Star.loop = true;
 
 		timer = game.time.create(false);
+		// timer.add()
 
 		this.txt.text = "Decoding Audio...";
 		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);

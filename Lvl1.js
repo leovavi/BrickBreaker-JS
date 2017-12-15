@@ -138,10 +138,8 @@ let Lvl1 = {
 
 		if(lives === 0)
 			this.fn.endGame(lvl1Music);
-		if(this.timer.running){
+		if(this.timer.running)
 			this.stopTime();
-			this.timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this);
-		}
 	},
 
 	power: function(player, power){
@@ -153,6 +151,6 @@ let Lvl1 = {
 
 	stopTime: function(){
 		this.timer.stop();
-		this.timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this);
+		sfx_Star.stop();
 	}
 }

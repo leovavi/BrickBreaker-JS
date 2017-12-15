@@ -8,7 +8,7 @@ let Lvl1 = {
 		this.fn = new globalFn();
 
 		this.width = game.world.width, this.height = game.world.height, this.playerVelX = 0.5, prevX = game.input.x;
-		this.brickCols = 1, this.brickRows = 1, lives = 3, points = 0, streak = 0, T = true, F = false;
+		this.brickCols = 12, this.brickRows = 11, lives = 3, points = 0, streak = 0, T = true, F = false;
 		let pos3T, pos2T;
 		currentLevel = 1;
 
@@ -54,7 +54,7 @@ let Lvl1 = {
 		this.bricks.bodyType = Phaser.Physics.ARCADE;
 
 		this.powers = game.add.group();
-		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 1, 7);
+		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 12, 7);
 		this.powers.enableBody = true;
 		this.powers.bodyType = Phaser.Physics.ARCADE;
 

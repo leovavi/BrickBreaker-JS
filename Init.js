@@ -6,6 +6,8 @@ window.onload = function(){
 	game.state.add("load", Load);
 	game.state.add("menu", MainMenu);
 	game.state.add("lvl1", Lvl1);
+	game.state.add("lvl2", Lvl2);
+	game.state.add("lvl3", Lvl3);
 	game.state.add("over", GameOver);
 	game.state.start("init");
 }

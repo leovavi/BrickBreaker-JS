@@ -207,4 +207,17 @@ class globalFn{
 		else
 			sfx_LoseLevel.play();
 	}
+
+	nextLevel(music,currentLevel){
+		music.stop();
+		if(currentLevel == 1)
+			game.state.start("lvl2");
+		else if (currentLevel == 2)
+			game.state.start("lvl3");
+			
+		if(lives>0)
+			sfx_WinLevel.play();
+		else
+			sfx_LoseLevel.play();
+	}
 }

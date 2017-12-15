@@ -121,7 +121,7 @@ class globalFn{
 		power.kill();
 	}
 
-	power(player, power, ball, playerVelX, timer, txtLives){
+	power(player, power, ball, playerVelX, txtLives){
 		let velX = ball.body.velocity.x, velY = ball.body.velocity.y;
 		let newVelX, newVelY, newPlayerVelX = -1;
 
@@ -154,7 +154,7 @@ class globalFn{
 				break;
 			case "doubleP":
 				if(timer.running)
-					this.stopTime(timer);
+					this.stopTime();
 				
 				timer.start();
 				sfx_DP.play();
@@ -198,7 +198,7 @@ class globalFn{
 		ball.body.velocity.set(velX, velY);
 	}
 
-	endGame(music, timer){
+	endGame(music){
 		music.stop();
 		game.state.start("over");
 		if(timer.running)
@@ -210,13 +210,26 @@ class globalFn{
 			sfx_LoseLevel.play();
 	}
 
-	stopTime(timer){
+	stopTime(){
 		timer.stop();
 		sfx_Star.stop();
-		this.addTimerDelay(timer);
+		this.addTimerDelay();
 	}
 
-	addTimerDelay(timer){
-		timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this, timer);
+	addTimerDelay(){
+		timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this);
 	}
+
+	// nextLevel(music,currentLevel){
+	// 	music.stop();
+	// 	if(currentLevel == 1)
+	// 		game.state.start("lvl2");
+	// 	else if (currentLevel == 2)
+	// 		game.state.start("lvl3");
+			
+	// 	if(lives>0)
+	// 		sfx_WinLevel.play();
+	// 	else
+	// 		sfx_LoseLevel.play();
+	// }
 }

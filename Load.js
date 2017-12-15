@@ -49,6 +49,10 @@ let Load = {
 		game.load.image("img_bYellow3", "assets/Bricks/amarillo4.png");
 		game.load.image("ball", "assets/ball3.png");
 		game.load.image("bkg", "assets/back.png");
+		game.load.image("level2Back", "assets/dk.jpg");
+		game.load.image("level3Back", "assets/sonic.jpg");
+		game.load.image("sonicMove", "assets/sonicMove.jpg");
+		game.load.image("dkMove", "assets/dkMove.jpg");
 
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);
@@ -99,7 +103,6 @@ let Load = {
 		sfx_Star.loop = true;
 
 		timer = game.time.create(false);
-		// timer.add()
 
 		this.txt.text = "Decoding Audio...";
 		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);

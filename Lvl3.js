@@ -1,6 +1,6 @@
-let Lvl1 = {
+let Lvl3 = {
 	preload: function(){
-		lvl1Music.play();
+		lvl3Music.play();
 	},
 
 	create: function(){
@@ -8,25 +8,25 @@ let Lvl1 = {
 		this.fn = new globalFn();
 
 		this.width = game.world.width, this.height = game.world.height, this.playerVelX = 0.5, prevX = game.input.x;
-		this.brickCols = 12, this.brickRows = 11, lives = 3, points = 0, streak = 0, T = true, F = false;
+		this.brickCols = 12, this.brickRows = 11, streak = 0, T = true, F = false;
 		let pos3T, pos2T;
-		currentLevel = 1;
+		currentLevel = 3;
 
 		this.design = [];
 		this.design.push(
 			[T, T, T, T, T, T, T, T, T, T, T, T],
-			[T, T, T, T, T, T, T, T, T, T, T, F],
-			[T, F, F, F, F, F, F, F, T, T, T, F],
-			[F, F, F, F, F, F, F, T, T, T, F, F],
-			[F, F, F, F, F, F, T, T, T, F, F, F],
-			[F, F, F, F, F, T, T, T, F, F, F, F],
-			[F, F, F, F, T, T, T, F, F, F, F, F],
-			[F, F, F, T, T, T, F, F, F, F, F, F],
-			[F, F, T, T, T, F, F, F, F, F, F, T],
-			[F, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, F, F, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
+			[T, T, T, T, T, T, T, T, T, T, T, T],
 			[T, T, T, T, T, T, T, T, T, T, T, T]);
 
-		this.background = game.add.tileSprite(0, 0, this.width, this.height, "level1Back");
+		this.background = game.add.tileSprite(0, 0, this.width, this.height, "level3Back");
 		
 		this.player = game.add.sprite(0, 0, "player");
 		this.playerHalf = this.player.width/2;
@@ -54,7 +54,7 @@ let Lvl1 = {
 		this.bricks.bodyType = Phaser.Physics.ARCADE;
 
 		this.powers = game.add.group();
-		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 12, 1);
+		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 12, 7);
 		this.powers.enableBody = true;
 		this.powers.bodyType = Phaser.Physics.ARCADE;
 
@@ -114,7 +114,7 @@ let Lvl1 = {
 			sfx_HitBrick.play();
 
 			if(this.bricks.countLiving() == 0)
-				this.fn.endGame(lvl1Music);
+				this.fn.endGame(lvl3Music);
 		}
 	},
 

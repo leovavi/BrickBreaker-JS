@@ -154,7 +154,7 @@ class globalFn{
 				break;
 			case "doubleP":
 				if(timer.running)
-					timer.stop();
+					this.stopTime(timer);
 				
 				timer.start();
 				sfx_DP.play();
@@ -173,7 +173,7 @@ class globalFn{
 				sfx_LifeDown.play();
 
 				if(lives === 0)
-					this.endGame(lvl1Music);
+					this.endGame(lvl1Music, timer);
 				break;
 		}
 
@@ -198,13 +198,25 @@ class globalFn{
 		ball.body.velocity.set(velX, velY);
 	}
 
-	endGame(music){
+	endGame(music, timer){
 		music.stop();
 		game.state.start("over");
+		if(timer.running)
+			timer.stop();
 
 		if(lives>0)
 			sfx_WinLevel.play();
 		else
 			sfx_LoseLevel.play();
+	}
+
+	stopTime(timer){
+		timer.stop();
+		sfx_Star.stop();
+		this.addTimerDelay(timer);
+	}
+
+	addTimerDelay(timer){
+		timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this, timer);
 	}
 }

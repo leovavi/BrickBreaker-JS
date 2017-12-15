@@ -54,7 +54,7 @@ let Lvl1 = {
 		this.bricks.bodyType = Phaser.Physics.ARCADE;
 
 		this.powers = game.add.group();
-		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 12, 7);
+		this.powerUps = this.fn.locatePowerUps(this.design, this.brickRows, this.brickCols, 12, 1);
 		this.powers.enableBody = true;
 		this.powers.bodyType = Phaser.Physics.ARCADE;
 
@@ -74,7 +74,7 @@ let Lvl1 = {
 		this.txtPoints.x = this.width;
 
 		this.timer = game.time.create(false);
-		this.timer.add(Phaser.Timer.SECOND * 20, this.stopTime, this);
+		this.fn.addTimerDelay(this.timer);
 
 		this.fn.resetPlayer(this.player, this.ball, this.height);
 		this.startBricks();
@@ -115,7 +115,7 @@ let Lvl1 = {
 			sfx_HitBrick.play();
 
 			if(this.bricks.countLiving() == 0)
-				this.fn.endGame(lvl1Music);
+				this.fn.endGame(lvl1Music, this.timer);
 		}
 	},
 
@@ -137,9 +137,9 @@ let Lvl1 = {
 		sfx_LoseLife.play();
 
 		if(lives === 0)
-			this.fn.endGame(lvl1Music);
+			this.fn.endGame(lvl1Music, this.timer);
 		if(this.timer.running)
-			this.stopTime();
+			this.fn.stopTime();
 	},
 
 	power: function(player, power){
@@ -147,10 +147,5 @@ let Lvl1 = {
 
 		if(newPlayerVelX != -1)
 			this.playerVelX = newPlayerVelX;
-	},
-
-	stopTime: function(){
-		this.timer.stop();
-		sfx_Star.stop();
 	}
 }

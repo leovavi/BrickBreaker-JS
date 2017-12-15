@@ -49,6 +49,8 @@ let Load = {
 		game.load.image("img_bYellow3", "assets/Bricks/amarillo4.png");
 		game.load.image("ball", "assets/ball3.png");
 		game.load.image("bkg", "assets/back.png");
+		game.load.image("level2Back", "assets/dk.jpg");
+		game.load.image("level3Back", "assets/sonic.jpg");
 
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);

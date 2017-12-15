@@ -1,4 +1,4 @@
-let Lvl1 = {
+let Lvl2 = {
 	preload: function(){
 		lvl1Music.play();
 	},
@@ -10,23 +10,23 @@ let Lvl1 = {
 		this.width = game.world.width, this.height = game.world.height, this.playerVelX = 0.5, prevX = game.input.x;
 		this.brickCols = 12, this.brickRows = 11, lives = 3, points = 0, streak = 0, T = true, F = false;
 		let pos3T, pos2T, velBallX = 0, velBallY = 0;
-		currentLevel = 1;
+		currentLevel = 2;
 
 		this.design = [];
 		this.design.push(
 			[T, T, T, T, T, T, T, T, T, T, T, T],
-			[T, T, T, T, T, T, T, T, T, T, T, F],
-			[T, F, F, F, F, F, F, F, T, T, T, F],
-			[F, F, F, F, F, F, F, T, T, T, F, F],
-			[F, F, F, F, F, F, T, T, T, F, F, F],
-			[F, F, F, F, F, T, T, T, F, F, F, F],
-			[F, F, F, F, T, T, T, F, F, F, F, F],
-			[F, F, F, T, T, T, F, F, F, F, F, F],
-			[F, F, T, T, T, F, F, F, F, F, F, T],
-			[F, T, T, T, T, T, T, T, T, T, T, T],
+			[F, T, T, T, T, T, T, T, T, T, T, F],
+			[F, F, T, T, T, T, T, T, T, T, F, F],
+			[F, F, F, T, T, T, T, T, T, F, F, F],
+			[F, F, F, F, T, T, T, T, F, F, F, F],
+			[F, F, F, F, F, T, T, F, F, F, F, F],
+			[F, F, F, F, T, T, T, T, F, F, F, F],
+			[F, F, F, T, T, T, T, T, T, F, F, F],
+			[F, F, T, T, T, T, T, T, T, T, F, F],
+			[F, T, T, T, T, T, T, T, T, T, T, F],
 			[T, T, T, T, T, T, T, T, T, T, T, T]);
 
-		this.background = game.add.tileSprite(0, 0, this.width, this.height, "level1Back");
+		this.background = game.add.tileSprite(0, 0, this.width, this.height, "level2Back");
 		
 		this.player = game.add.sprite(0, 0, "player");
 		this.playerHalf = this.player.width/2;

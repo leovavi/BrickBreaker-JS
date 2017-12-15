@@ -51,6 +51,8 @@ let Load = {
 		game.load.image("bkg", "assets/back.png");
 		game.load.image("level2Back", "assets/dk.jpg");
 		game.load.image("level3Back", "assets/sonic.jpg");
+		game.load.image("sonicMove", "assets/sonicMove.jpg");
+		game.load.image("dkMove", "assets/dkMove.jpg");
 
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);

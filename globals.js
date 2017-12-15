@@ -13,9 +13,7 @@ let lives = 3, points = 0;
 let minVelXB = 50, maxVelXB = 350, minVelP = 0.2, maxVelP = 0.8, incVelB = 50, incVelP = 0.1;
 
 brickImgs = ["img_bRed", "img_bGreen", "img_bPurple", "img_bYellow"];
-powerImgs = ["doubleP", "slowP", "fastP", "slowB", "fastB", "oneUp", "oneDown"];
-
-let timer;
+powerImgs = ["slowP", "fastP", "slowB", "fastB", "doubleP", "oneUp", "oneDown"];
 
 let txtLivesConfig = {
 	font: "18px sans-serif",

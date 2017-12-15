@@ -102,8 +102,6 @@ let Load = {
 		sfx_Star = game.add.audio("star");
 		sfx_Star.loop = true;
 
-		timer = game.time.create(false);
-
 		this.txt.text = "Decoding Audio...";
 		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);
 	},

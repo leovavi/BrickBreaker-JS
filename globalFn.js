@@ -135,7 +135,7 @@ class globalFn{
 				sfx_Fast.play();
 				break;
 			case "fastB":
-				if(velX < maxVelXB){
+				if(velX < maxVelXB && ball.isShot){
 					newVelX = velX+((velX < 0) ? incVelB*-1 : incVelB);
 					newVelY = velY+((velY < 0) ? incVelB*-1 : incVelB);
 
@@ -144,7 +144,7 @@ class globalFn{
 				sfx_Fast.play();
 				break;
 			case "slowB":
-				if(ball.body.velocity.x > minVelXB || ball.body.velocity.x < minVelXB*-1){
+				if((ball.body.velocity.x > minVelXB || ball.body.velocity.x < minVelXB*-1) && ball.isShot){
 					newVelX = velX+((velX < 0) ? incVelB : incVelB*-1);
 					newVelY = velY+((velY < 0) ? incVelB : incVelB*-1);
 
@@ -153,12 +153,12 @@ class globalFn{
 				sfx_Slow.play();
 				break;
 			case "doubleP":
-				if(timer.running){
-					this.stopTime(timer);
-				}
+				if(timer.running)
+					this.stopTime(timer, music);
 				
 				timer.start();
 				sfx_DP.play();
+				music.pause();
 				sfx_Star.play();
 				break;
 
@@ -213,14 +213,50 @@ class globalFn{
 			sfx_LoseLevel.play();
 	}
 
-	stopTime(timer){
+	stopTime(timer, music){
 		timer.stop();
 		sfx_Star.stop();
-		this.addTimerDelay(timer);
+		music.resume();
+		this.addTimerDelay(timer, music);
 	}
 
-	addTimerDelay(timer){
-		timer.add(Phaser.Timer.SECOND*20, this.stopTime, this, timer)
+	addTimerDelay(timer, music){
+		timer.add(Phaser.Timer.SECOND*20, this.stopTime, this, timer, music)
+	}
+
+	pauseGame(){
+		if(game.paused){
+			pauseBack.destroy();
+			pauseScreen.destroy();
+			btnCont.destroy();
+			sfx_Unpause.play();
+			game.input.keyboard.removeKeyCapture(Phaser.Keyboard.ENTER);
+			game.input.keyboard.removeKeyCapture(Phaser.Keyboard.ESC);
+			game.paused = false;
+		}else{
+			this.initPause();
+			sfx_Pause.play();
+			game.paused = true;
+		}
+	}
+
+	initPause(){
+		pauseBack = game.add.tileSprite(0, 0, game.world.width, game.world.height, "pauseBkg");
+
+		btnCont = game.add.button(0, 0, "cont", this.pauseGame, this, over, out, down);
+		btnCont.anchor.set(0.5, 0.5);
+		btnCont.x = game.world.centerX;
+		btnCont.y = game.world.centerY+130;
+
+		pauseScreen = game.add.sprite(0, 0, psImg);
+		pauseScreen.anchor.set(0.5, 0.5);
+		pauseScreen.x = game.world.centerX;
+		pauseScreen.y = game.world.centerY-50;
+
+		enter = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+		enter.onDown.add(this.pauseGame, this);
+		esc = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+		esc.onDown.add(this.pauseGame, this);
 	}
 
 	// nextLevel(music,currentLevel){

@@ -54,7 +54,7 @@ let GameOver = {
 	},
 
 	nextState: function(){
-		if(lives == 0)
+		if(lives == 0 || currentLevel === 3)
 			game.state.start("menu");
 		else if(currentLevel == 1)
 			game.state.start("lvl2");

@@ -53,12 +53,17 @@ let Load = {
 		game.load.image("level3Back", "assets/sonic.jpg");
 		game.load.image("sonicMove", "assets/sonicMove.jpg");
 		game.load.image("dkMove", "assets/dkMove.jpg");
+		game.load.image("pauseBkg", "assets/pause.png");
 		game.load.image("pause", "assets/btn_pause.png");
+		game.load.image("gokuPause", "assets/gokuPause.png");
+		game.load.image("dkPause", "assets/dkPause.png");
+		game.load.image("sonicPause", "assets/sonicPause.png");
 
 		//SpriteSheet Files
 		game.load.spritesheet("start", "assets/btn_start.png", 190, 49);
 		game.load.spritesheet("back", "assets/btn_back.png", 190, 49);
 		game.load.spritesheet("nxtLvl", "assets/btn_Nxt.png", 190, 49);
+		game.load.spritesheet("pause", "assets/btn_pause.png", 30, 30);
 		game.load.spritesheet("cont", "assets/btn_cont.png", 190, 49);
 
 		//Audio Files
@@ -79,6 +84,8 @@ let Load = {
 		game.load.audio("coin", "sound/mariocoin.mp3");
 		game.load.audio("kame", "sound/kamehameha.mp3");
 		game.load.audio("star", "sound/star.mp3");
+		game.load.audio("pause", "sound/pause.mp3");
+		game.load.audio("unpause", "sound/unpause.mp3");
 	},
 
 	create: function(){
@@ -103,6 +110,8 @@ let Load = {
 		sfx_GokuS = game.add.audio("kame");
 		sfx_Star = game.add.audio("star");
 		sfx_Star.loop = true;
+		sfx_Pause = game.add.audio("pause");
+		sfx_Unpause = game.add.audio("unpause");
 
 		this.txt.text = "Decoding Audio...";
 		game.sound.setDecodedCallback([menuMusic, lvl1Music], this.showMenu, this);

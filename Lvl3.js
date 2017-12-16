@@ -11,6 +11,7 @@ let Lvl3 = {
 		this.brickCols = 12, this.brickRows = 11, streak = 0, T = true, F = false;
 		let pos3T, pos2T;
 		currentLevel = 3;
+		psImg = "sonicPause";
 
 		this.design = [];
 		this.design.push(
@@ -74,7 +75,12 @@ let Lvl3 = {
 		this.txtPoints.x = this.width;
 
 		this.timer = game.time.create(false);
-		this.fn.addTimerDelay(this.timer);
+		this.fn.addTimerDelay(this.timer, lvl3Music);
+
+		this.btnPause = game.add.button(0, 0, "pause", this.fn.pauseGame, this.fn, over, out, down);
+		this.btnPause.anchor.set(1, 0);
+		this.btnPause.x = this.width;
+		this.btnPause.y = 0;
 
 		this.fn.resetPlayer(this.player, this.ball, this.height);
 		this.startBricks();
@@ -84,6 +90,9 @@ let Lvl3 = {
 		game.physics.arcade.collide(this.ball, this.player, this.hitPlayer, null, this);
 		game.physics.arcade.collide(this.ball, this.bricks, this.removeBrick, null, this);
 		game.physics.arcade.collide(this.player, this.powers, this.power, null, this);
+
+		if(game.input.keyboard.isDown(Phaser.Keyboard.ESC) || game.input.keyboard.isDown(Phaser.Keyboard.ENTER))
+			this.fn.pauseGame();
 
 		this.prevX = this.fn.movePlayer(this.prevX, this.player, this.playerVelX, this.playerHalf, this.width, this.ball, game);
 	},
@@ -137,7 +146,7 @@ let Lvl3 = {
 		sfx_LoseLife.play();
 
 		if(this.timer.running)
-			this.fn.stopTime(this.timer);
+			this.fn.stopTime(this.timer, lvl3Music);
 		if(lives === 0)
 			this.fn.endGame(lvl3Music, this.timer);
 	},
